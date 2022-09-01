@@ -1,0 +1,52 @@
+name: Build from pull request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+  build:
+    runs-on: ubuntu-latest
+    needs: checkout
+    strategy:
+      matrix:
+        package:
+          -  {name: loki-promtail, url: https://github.com/grafana/loki/releases/download/v2.6.1/promtail-linux-arm.zip, binary: promtail, arch: arm}
+          -  {name: loki-promtail, url: https://github.com/grafana/loki/releases/download/v2.6.1/promtail-linux-arm64.zip, binary: promtail, arch: arm64}
+    steps:
+      - name: prepare package
+        run: |
+          cp -r src/{{ matrix.name }} .debpkg-{{ matrix.name }}-{{ matrix.arch }}
+          bin/fetch.sh {{ matrix.url }} .debpkg-{{ matrix.name }}-{{ matrix.arch }} {{ matrix.name }}
+
+      - uses: jiro4989/build-deb-action@v2
+        with:
+          package: metal-bootloader
+          package_root: .debpkg-{{ matrix.name }}-{{ matrix.arch }}
+          maintainer: MetalStack
+          # version: ${{ github.ref }} # refs/tags/v*.*.*
+          version: 0.0.1
+          arch: {{ matrix.arch }}
+          desc: {{ matrix.name }}
+
+    deploy:
+      runs-on: ubuntu-latest
+      needs: build
+      steps:
+        - name: prepare deploy
+          run: |
+            mkdir -p deploy
+            cp *.deb deploy/
+        - name: Deploy
+          uses: JamesIves/github-pages-deploy-action@v4
+          with:
+            folder: deploy
+            clean: false
