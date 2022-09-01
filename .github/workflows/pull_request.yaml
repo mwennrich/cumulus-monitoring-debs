@@ -39,3 +39,4 @@ jobs:
         with:
           folder: deploy
           clean: false
+          force: false
