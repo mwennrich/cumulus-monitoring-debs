@@ -6,9 +6,9 @@ on:
       - main
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
+    concurrency: build-${{ github.ref }}
     strategy:
       matrix:
         package:
