@@ -14,13 +14,13 @@ jobs:
       matrix:
         package:
           - {name: loki-promtail, version: 2.6.1, url: "https://github.com/grafana/loki/releases/download/vVERSION/promtail-linux-arm.zip", binary: promtail, arch: armel}
-          - {name: loki-promtail, version: 2.6.1, url: "https://github.com/grafana/loki/releases/download/vVERSION/promtail-linux-arm64.zip", binary: promtail, arch: arm64}
+          - {name: loki-promtail, version: 2.6.1, url: "https://github.com/grafana/loki/releases/download/vVERSION/promtail-linux-amd64.zip", binary: promtail, arch: amd64}
           - {name: prometheus-node-exporter, version: 1.3.1, url: "https://github.com/prometheus/node_exporter/releases/download/vVERSION/node_exporter-VERSION.linux-armv5.tar.gz", binary: node_exporter, arch: armel}
-          - {name: prometheus-node-exporter, version: 1.3.1, url: "https://github.com/prometheus/node_exporter/releases/download/vVERSION/node_exporter-VERSION.linux-arm64.tar.gz", binary: node_exporter, arch: arm64}
+          - {name: prometheus-node-exporter, version: 1.3.1, url: "https://github.com/prometheus/node_exporter/releases/download/vVERSION/node_exporter-VERSION.linux-amd64.tar.gz", binary: node_exporter, arch: amd64}
           - {name: prometheus-cumulus-exporter, version: 0.1.4, url: "https://github.com/tynany/cumulus_exporter/releases/download/vVERSION/cumulus_exporter-VERSION.linux-armv5.tar.gz", binary: cumulus_exporter, arch: armel}
-          - {name: prometheus-cumulus-exporter, version: 0.1.4, url: "https://github.com/tynany/cumulus_exporter/releases/download/vVERSION/cumulus_exporter-VERSION.linux-arm64.tar.gz", binary: cumulus_exporter, arch: arm64}
+          - {name: prometheus-cumulus-exporter, version: 0.1.4, url: "https://github.com/tynany/cumulus_exporter/releases/download/vVERSION/cumulus_exporter-VERSION.linux-amd64.tar.gz", binary: cumulus_exporter, arch: amd64}
           - {name: prometheus-frr-exporter, version: 1.1.2, url: "https://github.com/tynany/frr_exporter/releases/download/vVERSION/frr_exporter-VERSION.linux-armv5.tar.gz", binary: frr_exporter, arch: armel}
-          - {name: prometheus-frr-exporter, version: 1.1.2, url: "https://github.com/tynany/frr_exporter/releases/download/vVERSION/frr_exporter-VERSION.linux-arm64.tar.gz", binary: frr_exporter, arch: arm64}
+          - {name: prometheus-frr-exporter, version: 1.1.2, url: "https://github.com/tynany/frr_exporter/releases/download/vVERSION/frr_exporter-VERSION.linux-amd64.tar.gz", binary: frr_exporter, arch: amd64}
 
     steps:
       - name: Checkout
