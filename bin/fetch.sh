@@ -12,7 +12,7 @@ NAME=$4
 
 mkdir -p "$DIR/usr/bin"
 
-URL=${URLTEMPLATE/VERSION/"$PKGVERSION"}
+URL=${URLTEMPLATE//VERSION/"$PKGVERSION"}
 
 if [[ $URL =~ .*tar.gz ]]; then
 	curl -Ls "$URL" | tar xzf - >"$DIR"/usr/bin/"$NAME"
