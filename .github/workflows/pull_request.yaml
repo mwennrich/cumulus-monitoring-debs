@@ -37,16 +37,16 @@ jobs:
           arch: ${{ matrix.arch }}
           desc: ${{ matrix.name }}
 
-    deploy:
-      runs-on: ubuntu-latest
-      needs: build
-      steps:
-        - name: prepare deploy
-          run: |
-            mkdir -p deploy
-            cp *.deb deploy/
-        - name: Deploy
-          uses: JamesIves/github-pages-deploy-action@v4
-          with:
-            folder: deploy
-            clean: false
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: prepare deploy
+        run: |
+          mkdir -p deploy
+          cp *.deb deploy/
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: deploy
+          clean: false
