@@ -8,6 +8,8 @@ URL=$1
 DIR=$2
 NAME=$3
 
+echo "debug url: $URL dir: $DIR name: $NAME"
+
 if [[ $URL  =~ .*tar.gz ]]; then
     curl -Ls "$URL" | tar xzf - > "$DIR"/usr/bin/"$NAME"
 else
