@@ -20,7 +20,7 @@ jobs:
       - name: prepare package
         run: |
           cp -r src/${{ matrix.package.name }} .debpkg-${{ matrix.package.name }}-${{ matrix.package.arch }}
-          bin/fetch.sh ${{ matrix.package.url }} .debpkg-${{ matrix.package.name }}-${{ matrix.package.arch }} ${{ matrix.package.name }}
+          bin/fetch.sh ${{ matrix.package.url }} .debpkg-${{ matrix.package.name }}-${{ matrix.package.arch }} ${{ matrix.package.binary }}
 
       - uses: jiro4989/build-deb-action@v2
         with:

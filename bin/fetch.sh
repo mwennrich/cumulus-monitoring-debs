@@ -9,7 +9,7 @@ URL=$1
 DIR=$2
 NAME=$3
 
-mkdir -p "$DIR"
+mkdir -p "$DIR/usr/bin"
 
 if [[ $URL  =~ .*tar.gz ]]; then
     curl -Ls "$URL" | tar xzf - > "$DIR"/usr/bin/"$NAME"
