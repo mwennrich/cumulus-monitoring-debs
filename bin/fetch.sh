@@ -14,6 +14,7 @@ mkdir -p "$DIR/usr/bin"
 
 URL=${URLTEMPLATE//VERSION/"$PKGVERSION"}
 
+ echo "debug url $URL template $URLTEMPLATE version $PKGVERSION dir $DIR name $NAME"
 if [[ $URL =~ .*tar.gz ]]; then
 	curl -Ls "$URL" -o download.tar.gz
     mkdir -p tmp
