@@ -12,23 +12,22 @@ jobs:
     strategy:
       matrix:
         package:
-          - {name: loki-promtail, url: "https://github.com/grafana/loki/releases/download/v2.6.1/promtail-linux-arm.zip", binary: promtail, arch: arm}
-          - {name: loki-promtail, url: "https://github.com/grafana/loki/releases/download/v2.6.1/promtail-linux-arm64.zip", binary: promtail, arch: arm64}
+          - {name: loki-promtail, version: 2.6.1, url: "https://github.com/grafana/loki/releases/download/vVERSION/promtail-linux-arm.zip", binary: promtail, arch: arm}
+          - {name: loki-promtail, version: 2.6.1, url: "https://github.com/grafana/loki/releases/download/vVERSION/promtail-linux-arm64.zip", binary: promtail, arch: arm64}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: prepare package
         run: |
           cp -r src/${{ matrix.package.name }} .debpkg-${{ matrix.package.name }}-${{ matrix.package.arch }}
-          bin/fetch.sh ${{ matrix.package.url }} .debpkg-${{ matrix.package.name }}-${{ matrix.package.arch }} ${{ matrix.package.binary }}
+          bin/fetch.sh ${{ matrix.package.url }} ${{ matrix.package.version }} .debpkg-${{ matrix.package.name }}-${{ matrix.package.arch }} ${{ matrix.package.binary }}
 
       - uses: jiro4989/build-deb-action@v2
         with:
-          package: metal-bootloader
+          package: ${{ matrix.package.name }}
           package_root: .debpkg-${{ matrix.package.name }}-${{ matrix.package.arch }}
           maintainer: MetalStack
-          # version: ${{ github.ref }} # refs/tags/v*.*.*
-          version: 0.0.1
+          version: ${{ matrix.package.version }}
           arch: ${{ matrix.package.arch }}
           desc: ${{ matrix.package.name }}
       - name: prepare deploy
