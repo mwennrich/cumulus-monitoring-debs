@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: build-${{ github.ref }}
     strategy:
+      max-parallel: 2
       matrix:
         package:
           - {name: loki-promtail, version: 2.6.1, url: "https://github.com/grafana/loki/releases/download/vVERSION/promtail-linux-arm.zip", binary: promtail, arch: armel}
