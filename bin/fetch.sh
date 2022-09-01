@@ -15,7 +15,10 @@ mkdir -p "$DIR/usr/bin"
 URL=${URLTEMPLATE//VERSION/"$PKGVERSION"}
 
 if [[ $URL =~ .*tar.gz ]]; then
-	curl -Ls "$URL" | tar xzf - >"$DIR"/usr/bin/"$NAME"
+	curl -Ls "$URL" -o download.tar.gz
+    mkdir -p tmp
+    tar -C tmp -xzf download.tar.gz
+    cp $(find tmp -name "$NAME") "$DIR"/usr/bin/"$NAME"
 else
 	curl -Ls "$URL" | zcat >"$DIR"/usr/bin/"$NAME"
 fi
