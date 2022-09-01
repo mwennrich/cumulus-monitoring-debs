@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "debug $*"
-
 if [ "$#" -ne 3 ]; then
     echo "Illegal number of parameters"
     exit 1
@@ -11,6 +9,7 @@ URL=$1
 DIR=$2
 NAME=$3
 
+mkdir -p "$DIR"
 
 if [[ $URL  =~ .*tar.gz ]]; then
     curl -Ls "$URL" | tar xzf - > "$DIR"/usr/bin/"$NAME"
