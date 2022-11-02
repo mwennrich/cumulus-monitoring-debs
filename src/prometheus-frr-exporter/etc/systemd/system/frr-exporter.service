@@ -1,0 +1,12 @@
+# frr-exporter.service
+[Unit]
+Description=Prometheus frr_exporter
+After=networking.service syslog.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/frr_exporter  --no-collector.ospf --no-collector.bgp6 --no-collector.bfd
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

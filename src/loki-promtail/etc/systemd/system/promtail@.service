@@ -1,0 +1,13 @@
+# loki-promtail.service
+[Unit]
+Description=Loki promtail
+After=network-online.target networking.service auditd.service
+
+[Service]
+Type=simple
+ExecStart=/bin/ip vrf exec %i /usr/bin/promtail -config.file=/etc/promtail/promtail.yaml
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

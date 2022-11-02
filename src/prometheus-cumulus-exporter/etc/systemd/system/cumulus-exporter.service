@@ -1,0 +1,13 @@
+# cumulus-exporter.service
+[Unit]
+Description=Prometheus cumulus_exporter
+After=networking.service syslog.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/cumulus_exporter 
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

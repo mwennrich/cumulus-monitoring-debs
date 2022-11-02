@@ -1,0 +1,13 @@
+# node-exporter.service
+[Unit]
+Description=Prometheus node_exporter
+After=networking.service syslog.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node_exporter --no-collector.schedstat --no-collector.mdadm --no-collector.infiniband
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
